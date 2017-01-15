@@ -338,10 +338,11 @@
             this.Controls.Add(this.splitContainerControl1);
             this.Controls.Add(this.pnlAlt);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(650, 600);
             this.Name = "FrmMain";
             this.Padding = new System.Windows.Forms.Padding(16);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmMain";
+            this.Text = "Contacts";
             ((System.ComponentModel.ISupportInitialize)(this.pnlAlt)).EndInit();
             this.pnlAlt.ResumeLayout(false);
             this.tblBottomMainLayout.ResumeLayout(false);

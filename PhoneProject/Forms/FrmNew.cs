@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DevExpress.XtraEditors;
+using PhoneProject.Helper;
 using PhoneProject.Models;
 using PhoneProject.Properties;
 
@@ -9,7 +10,7 @@ namespace PhoneProject.Forms
 {
     public partial class FrmNew : XtraForm
     {
-        private mydb _db;
+        private Mydb _db;
 
         private readonly List<Phone> _phoneList = new List<Phone>();
         private readonly List<Email> _mailList = new List<Email>();
@@ -21,6 +22,8 @@ namespace PhoneProject.Forms
             btnCancel.Click += (sender, args) => Close();
 
             GetTypes();
+
+            ControlThe.Mask(txtPhone);
 
             PhoneClickEvent();
 
@@ -45,7 +48,7 @@ namespace PhoneProject.Forms
 
             btnRemoveEmail.Click += (sender, args) =>
             {
-                if (txtEmail.Text == "") return;
+                if (listEmail.Items.Count < 1) return;
 
                 var mail = listEmail.SelectedItem.ToString();
                 for (var i = 0; i < _mailList.Count; i++)
@@ -76,7 +79,7 @@ namespace PhoneProject.Forms
 
             btnRemovePhone.Click += (sender, args) =>
             {
-                if (txtPhone.Text == "") return;
+                if (listPhone.Items.Count < 1) return;
 
                 var phone = listPhone.SelectedItem.ToString();
 
@@ -90,7 +93,7 @@ namespace PhoneProject.Forms
 
         private void GetTypes()
         {
-            using (_db = new mydb())
+            using (_db = new Mydb())
             {
                 var types = _db.Types.Select(x => new
                 {
@@ -105,15 +108,14 @@ namespace PhoneProject.Forms
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
+        private void btnSave_Click(object sender, EventArgs e){
             if (FirstnameTextEdit.Text == "" ||
                 NicknameTextEdit.Text == "" ||
                 listPhone.Items.Count < 1 ||
                 listEmail.Items.Count < 1)
                 return;
 
-            using (_db = new mydb())
+            using (_db = new Mydb())
             {
 
                 var user = new User

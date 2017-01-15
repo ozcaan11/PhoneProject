@@ -4,12 +4,13 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using PhoneProject.Models;
+using PhoneProject.Properties;
 
 namespace PhoneProject.Forms
 {
     public partial class FrmMain : XtraForm
     {
-        private mydb _db;
+        private Mydb _db;
         public FrmMain()
         {
             InitializeComponent();
@@ -41,7 +42,7 @@ namespace PhoneProject.Forms
 
         private void GetContactList()
         {
-            using (_db = new mydb())
+            using (_db = new Mydb())
             {
                 var datas = _db.Users
                     .Include(c => c.Phones)
@@ -65,22 +66,21 @@ namespace PhoneProject.Forms
 
             var id = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Id"));
 
-            using (_db = new mydb())
+            using (_db = new Mydb())
             {
                 var data = _db.Users.Include(x => x.Phones).Include(x => x.Emails).FirstOrDefault(x => x.Id == id);
 
                 if (data == null) return;
 
-                lblFullname.Text = data.Firstname + " " + data.Lastname;
+                lblFullname.Text = data.Firstname + @" " + data.Lastname;
                 lblNickname.Text = data.Nickname;
                 lblAdress.Text = data.Adress;
                 foreach (var phone in data.Phones)
-                    lblPhones.Text += phone.Number + "\n";
+                    lblPhones.Text += phone.Type.Name.PadRight(9)+@": "+phone.Number + Resources.new_line;
                 foreach (var mail in data.Emails)
-                    lblMails.Text += mail.Name + "\n";
+                    lblMails.Text += mail.Name + Resources.new_line;
             }
         }
-
         private void ClearDetails()
         {
             lblPhones.Text = "";
@@ -98,7 +98,7 @@ namespace PhoneProject.Forms
             var delete = XtraMessageBox.Show("Do you really want to delete user ?", "Delete " + fullname + "?", MessageBoxButtons.YesNo);
             if (delete != DialogResult.Yes) return;
 
-            using (_db = new mydb())
+            using (_db = new Mydb())
             {
                 var user = _db.Users.Include(x => x.Phones).Include(x => x.Emails).FirstOrDefault(x => x.Id == id);
                 if (user == null) return;

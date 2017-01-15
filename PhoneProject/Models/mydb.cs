@@ -2,9 +2,9 @@ using System.Data.Entity;
 
 namespace PhoneProject.Models
 {
-    public class mydb : DbContext
+    public class Mydb : DbContext
     {
-        public mydb()
+        public Mydb()
             : base("name=mydb")
         {
         }

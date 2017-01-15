@@ -278,6 +278,8 @@
             // 
             this.txtPhone.Location = new System.Drawing.Point(24, 183);
             this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Properties.Mask.EditMask = "(999) 000-0000";
+            this.txtPhone.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Simple;
             this.txtPhone.Size = new System.Drawing.Size(98, 20);
             this.txtPhone.StyleController = this.dataLayoutControl1;
             this.txtPhone.TabIndex = 3;
@@ -560,7 +562,7 @@
             this.Padding = new System.Windows.Forms.Padding(16);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add New Contact";
+            this.Text = "Edit Contact";
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);

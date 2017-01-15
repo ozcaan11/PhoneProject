@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using DevExpress.XtraEditors;
+using PhoneProject.Helper;
 using PhoneProject.Models;
 using PhoneProject.Properties;
 
@@ -10,7 +11,7 @@ namespace PhoneProject.Forms
 {
     public partial class FrmEdit : XtraForm
     {
-        private readonly mydb _db = new mydb();
+        private readonly Mydb _db = new Mydb();
         private User _user;
 
         private List<Phone> _phoneList = new List<Phone>();
@@ -21,6 +22,8 @@ namespace PhoneProject.Forms
             InitializeComponent();
 
             btnCancel.Click += (sender, args) => Close();
+
+            ControlThe.Mask(txtPhone);
 
             PrepareForm(id);
 
@@ -60,7 +63,6 @@ namespace PhoneProject.Forms
                 var mail = txtEmail.Text;
                 if (mail == "") return;
                 _user.Emails.Add(new Email { Name = mail });
-
 
                 listEmail.Items.Add(mail);
                 txtEmail.Text = "";

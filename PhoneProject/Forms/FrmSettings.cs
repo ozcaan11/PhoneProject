@@ -9,7 +9,7 @@ namespace PhoneProject.Forms
 {
     public partial class FrmSettings : XtraForm
     {
-        private readonly mydb _db = new mydb();
+        private readonly Mydb _db = new Mydb();
         private readonly List<Type> _typeList = new List<Type>();
 
         public FrmSettings()
